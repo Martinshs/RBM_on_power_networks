@@ -1,4 +1,4 @@
-# Power Grid Dynamics with Random Batch Methods
+# Random Batch Approximation for Power Networks
 
 ## Overview
 
