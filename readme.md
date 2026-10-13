@@ -4,7 +4,13 @@
 
 This repository studies transient rotor-angle dynamics in the classical three-machine representation associated with the IEEE/WSCC 9-bus benchmark. The dynamics are described by coupled swing equations, and a Random Batch Method (RBM) is used to approximate the electrical interactions between synchronous machines.
 
+
 The three-machine model is obtained by reducing the electrical network to the internal generator nodes through Kron reduction. This yields a lower-dimensional generator-only ODE, while the resulting effective coupling matrix can be dense even when the original transmission network is sparse.
+
+---
+
+![compartion_dynamics](ieee9_full_vs_rbm_high_quality.gif)
+
 
 The objectives are to simulate the transient response after a network disturbance, study recovery or loss of synchronism, and compare the exact dynamics with a random-batch approximation.
 
