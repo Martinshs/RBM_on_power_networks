@@ -132,23 +132,6 @@ $$ e_\delta^h(t)=\|\delta^h(t)-\delta(t)\|_2, \qquad e_\omega^h(t)=\|\omega^h(t)
 
 Repeated independent realizations are used to estimate mean and mean-square errors and to study their dependence on the switching time $h$.
 
-## 6. Repository structure
-
-```text
-power-grid-rbm/
-├── README.md
-├── src/
-│   ├── model.py
-│   ├── rbm.py
-│   ├── simulation.py
-│   └── parameters.py
-├── experiments/
-│   ├── transient_stability.py
-│   ├── clearing_time.py
-│   └── rbm_convergence.py
-├── figures/
-└── requirements.txt
-```
 
 ## References
 
