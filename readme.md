@@ -1,4 +1,4 @@
-# Transient Stability and Random Batch Approximation of the IEEE 9-Bus System
+# Power Grid Dynamics with Random Batch Methods
 
 ## Overview
 
