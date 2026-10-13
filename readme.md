@@ -21,13 +21,7 @@ Let $\mathcal I=\{1,2,3\}$ denote the set of synchronous machines. For each mach
 
 The dynamics are
 
-$$
-\dot\delta_i(t)=\omega_i(t),\qquad
-M_i\dot\omega_i(t)
-=
-P_i-D_i\omega_i(t)
--\sum_{j\neq i}K_{ij}(t)\sin\bigl(\delta_i(t)-\delta_j(t)\bigr).
-$$
+$$\dot\delta_i(t)=\omega_i(t),\qquad M_i\dot\omega_i(t)=P_i-D_i\omega_i(t)-\sum_{j\neq i}K_{ij}(t)\sin\bigl(\delta_i(t)-\delta_j(t)\bigr).$$
 
 In vector form,
 
@@ -36,7 +30,7 @@ $$
 M\dot\omega=P-D\omega-F(\delta,t),
 $$
 
-where $M=\operatorname{diag}(M_1,M_2,M_3)$, $D=\operatorname{diag}(D_1,D_2,D_3)$, $P=(P_1,P_2,P_3)^\top$, and
+where $M=\text{diag}(M_1,M_2,M_3)$, $D=\text{diag}(D_1,D_2,D_3)$, $P=(P_1,P_2,P_3)^\top$, and
 
 $$
 F_i(\delta,t)=\sum_{j\neq i}K_{ij}(t)\sin(\delta_i-\delta_j).
@@ -56,25 +50,11 @@ Hence $\dot\delta(0)=0$ and $\dot\omega(0)=0$. Since only angle differences ente
 
 Let $0<t_f<t_c<T$ denote the disturbance and clearing times. The effective coupling matrix is modeled by
 
-$$
-K(t)=
-\begin{cases}
-K^{\mathrm{pre}}, & 0\leq t<t_f,\\
-K^{\mathrm{fault}}, & t_f\leq t<t_c,\\
-K^{\mathrm{post}}, & t_c\leq t\leq T.
-\end{cases}
-$$
+$$K(t)=K^{\mathrm{pre}} \text{ for } 0\leq t < t_f,\qquad K(t)=K^{\mathrm{fault}} \text{ for } t_f\leq t < t_c, \qquad K(t)=K^{\mathrm{post}} \text{ for } t_c \leq t \leq T. $$
 
 The state remains continuous at the switching times, while the vector field changes through $K(t)$. Immediately after the disturbance,
 
-$$
-M_i\dot\omega_i(t_f^+)
-=
-P_i-
-\sum_{j\neq i}
-K_{ij}^{\mathrm{fault}}
-\sin(\delta_i^\star-\delta_j^\star).
-$$
+$$M_i\dot\omega_i(t_f^+) = P_i- \sum_{j\neq i} K_{ij}^{\mathrm{fault}} \sin(\delta_i^\star-\delta_j^\star).$$
 
 This quantity is generally nonzero, so the machines accelerate or decelerate relative to the synchronous reference and a transient response develops.
 
@@ -92,45 +72,27 @@ The main outputs of the deterministic simulation are therefore the relative roto
 
 ## 4. Random Batch Method
 
-The interaction field can be decomposed over the three unordered pairs $\mathcal P=\{\{1,2\},\{1,3\},\{2,3\}\}$. For $1\leq i<j\leq3$, define
+The interaction field can be decomposed over the three unordered pairs $\mathcal{P}=\lbrace\lbrace 1,2\rbrace,\lbrace 1,3\rbrace,\lbrace 2,3\rbrace\rbrace$. For $1\leq i<j\leq3$, define
 
-$$
-\Phi_{ij}(\delta,t)
-=
-K_{ij}(t)\sin(\delta_i-\delta_j)(e_i-e_j),
-$$
+$$ \Phi_{ij}(\delta,t) = K_{ij}(t)\sin(\delta_i-\delta_j)(e_i-e_j), $$
 
 where $e_i$ is the $i$-th canonical vector of $\mathbb R^3$. The complete interaction satisfies
 
-$$
-F(\delta,t)=\Phi_{12}(\delta,t)+\Phi_{13}(\delta,t)+\Phi_{23}(\delta,t).
-$$
+$$ F(\delta,t)=\Phi_{12}(\delta,t)+\Phi_{13}(\delta,t)+\Phi_{23}(\delta,t). $$
 
 Let $h>0$ be the RBM switching time and let $t_n=nh$. At the beginning of each interval $[t_n,t_{n+1})$, one pair $E_n\in\mathcal P$ is sampled uniformly, so that $\mathbb P(E_n=\{i,j\})=1/3$.
 
-If $E_n=\{i,j\}$, the interaction field is approximated on $[t_n,t_{n+1})$ by
+If $E_n=\lbrace i,j\rbrace$, the interaction field is approximated on $[t_n,t_{n+1})$ by
 
-$$
-\widehat F_n(\delta,t)=3\Phi_{ij}(\delta,t).
-$$
+$$ \widehat F_n(\delta,t)=3\Phi_{ij}(\delta,t). $$
 
 The factor $3$ gives the unbiasedness property
 
-$$
-\mathbb E\!\left[\widehat F_n(\delta,t)\mid\delta\right]
-=
-F(\delta,t).
-$$
+$$ \mathbb{E}\left[\widehat F_n(\delta,t)\mid\delta\right] = F(\delta,t). $$
 
 The random-batch dynamics are
 
-$$
-\dot\delta^h(t)=\omega^h(t),\qquad
-M\dot\omega^h(t)
-=
-P-D\omega^h(t)-\widehat F_n(\delta^h(t),t),
-\qquad t\in[t_n,t_{n+1}).
-$$
+$$ \dot\delta^h(t)=\omega^h(t),\qquad M\dot\omega^h(t) = P-D\omega^h(t)-\widehat F_n(\delta^h(t),t), \qquad t\in[t_n,t_{n+1}).$$
 
 They use the same initial condition as the deterministic system: $\delta^h(0)=\delta^\star$ and $\omega^h(0)=0$.
 
@@ -144,12 +106,7 @@ The repository considers four experiments.
 
 We verify that the prescribed initial state satisfies the pre-disturbance equilibrium condition by computing
 
-$$
-R_i
-=
-P_i-\sum_{j\neq i}K_{ij}^{\mathrm{pre}}
-\sin(\delta_i^\star-\delta_j^\star).
-$$
+$$ R_i = P_i-\sum_{j\neq i}K_{ij}^{\mathrm{pre}} \sin(\delta_i^\star-\delta_j^\star). $$
 
 The equilibrium is numerically consistent when $|R_i|\leq\varepsilon_{\mathrm{tol}}$ for every $i$.
 
@@ -165,11 +122,7 @@ The disturbance duration $\tau=t_c-t_f$ is varied while the remaining parameters
 
 The deterministic solution $(\delta,\omega)$ is compared with the random-batch solution $(\delta^h,\omega^h)$. We measure
 
-$$
-e_\delta^h(t)=\|\delta^h(t)-\delta(t)\|_2,
-\qquad
-e_\omega^h(t)=\|\omega^h(t)-\omega(t)\|_2.
-$$
+$$ e_\delta^h(t)=\|\delta^h(t)-\delta(t)\|_2, \qquad e_\omega^h(t)=\|\omega^h(t)-\omega(t)\|_2. $$
 
 Repeated independent realizations are used to estimate mean and mean-square errors and to study their dependence on the switching time $h$.
 
